@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Text, View, StyleSheet } from 'react-native';
 import { BarCodeScanner } from 'expo';
 import { withNavigationFocus } from '@react-navigation/core';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack-web';
 
 const IndexScreen = ({ navigation }) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

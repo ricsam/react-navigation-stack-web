@@ -4,26 +4,29 @@
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "postinstall": "rm -rf node_modules/react-navigation-stack/{.git,node_modules,example}"
+    "storybook": "STORYBOOK_RUNNING=true start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "postinstall": "rm -rf node_modules/react-navigation-stack-web/{.git,node_modules,example}"
   },
   "dependencies": {
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-paper": "^2.2.0",
-    "react-navigation-stack": "../",
-    "react-navigation-drawer": "^1.1.0",
-    "react-navigation-tabs": "*",
-    "@react-navigation/core": "^3.0.0",
-    "@react-navigation/native": "^3.1.1",
-    "expo": "32.0.0",
-    "hoist-non-react-statics": "^2.5.0",
-    "prop-types": "^15.6.0"
+    "@react-navigation/core": "^3.1.1",
+    "@react-navigation/web": "^1.0.0-alpha.7",
+    "react": "^16.8.1",
+    "react-art": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-native-web": "^0.10.0"
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "^3.0.0",
-    "glob-to-regexp": "^0.3.0"
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@storybook/addon-actions": "^4.1.11",
+    "@storybook/addon-links": "^4.1.11",
+    "@storybook/addon-viewport": "^4.1.11",
+    "@storybook/addons": "^4.1.11",
+    "@storybook/react": "^4.1.11",
+    "babel-loader": "^8.0.5",
+    "react-native-web-image-loader": "^0.0.7"
   }
 }

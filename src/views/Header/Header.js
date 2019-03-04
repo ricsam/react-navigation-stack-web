@@ -2,15 +2,12 @@ import React from 'react';
 
 import {
   Animated,
-  Image,
   Platform,
   StyleSheet,
   View,
   I18nManager,
-  MaskedViewIOS,
+  SafeAreaView,
 } from 'react-native';
-
-import { withOrientation, SafeAreaView } from '@react-navigation/native';
 
 import HeaderTitle from './HeaderTitle';
 import HeaderBackButton from './HeaderBackButton';
@@ -24,6 +21,8 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 const TITLE_OFFSET_CENTER_ALIGN = Platform.OS === 'ios' ? 70 : 56;
 const TITLE_OFFSET_LEFT_ALIGN = Platform.OS === 'ios' ? 20 : 56;
 
+const __DEV__ = process.env.NODE_ENV === 'development';
+
 const getTitleOffsets = (
   layoutPreset,
   forceBackTitle,
@@ -34,7 +33,7 @@ const getTitleOffsets = (
     // Maybe at some point we should do something different if the back title is
     // explicitly enabled, for now people can control it manually
 
-    let style = {
+    const style = {
       left: TITLE_OFFSET_LEFT_ALIGN,
       right: TITLE_OFFSET_LEFT_ALIGN,
     };
@@ -47,8 +46,9 @@ const getTitleOffsets = (
     }
 
     return style;
-  } else if (layoutPreset === 'center') {
-    let style = {
+  }
+  if (layoutPreset === 'center') {
+    const style = {
       left: TITLE_OFFSET_CENTER_ALIGN,
       right: TITLE_OFFSET_CENTER_ALIGN,
     };
@@ -61,13 +61,8 @@ const getTitleOffsets = (
   }
 };
 
-const getAppBarHeight = isLandscape => {
-  return Platform.OS === 'ios'
-    ? isLandscape && !Platform.isPad
-      ? 32
-      : 44
-    : 56;
-};
+const getAppBarHeight = (isLandscape) =>
+  Platform.OS === 'ios' ? (isLandscape && !Platform.isPad ? 32 : 44) : 56;
 
 class Header extends React.PureComponent {
   static get HEIGHT() {
@@ -107,7 +102,7 @@ class Header extends React.PureComponent {
   }
 
   _getLastScene(scene) {
-    return this.props.scenes.find(s => s.index === scene.index - 1);
+    return this.props.scenes.find((s) => s.index === scene.index - 1);
   }
 
   _getBackButtonTitleString(scene) {
@@ -130,7 +125,7 @@ class Header extends React.PureComponent {
     return lastScene.descriptor.options.headerTruncatedBackTitle;
   }
 
-  _renderTitleComponent = props => {
+  _renderTitleComponent = (props) => {
     const { layoutPreset } = this.props;
     const { options } = props.scene.descriptor;
     const headerTitle = options.headerTitle;
@@ -147,7 +142,7 @@ class Header extends React.PureComponent {
     // calculated size of the title.
     const onLayout =
       layoutPreset === 'center'
-        ? e => {
+        ? (e) => {
             this.setState({
               widths: {
                 ...this.state.widths,
@@ -178,7 +173,7 @@ class Header extends React.PureComponent {
     );
   };
 
-  _renderLeftComponent = props => {
+  _renderLeftComponent = (props) => {
     const { options } = props.scene.descriptor;
     if (
       React.isValidElement(options.headerLeft) ||
@@ -261,7 +256,7 @@ class Header extends React.PureComponent {
     );
   };
 
-  _renderRightComponent = props => {
+  _renderRightComponent = (props) => {
     const { headerRight } = props.scene.descriptor.options;
     return headerRight || null;
   };
@@ -290,20 +285,19 @@ class Header extends React.PureComponent {
         this._renderLeftComponent,
         this.props.leftInterpolator
       );
-    } else {
-      return this._renderModularSubView(
-        { ...props, style },
-        'left',
-        this._renderModularLeftComponent,
-        this.props.leftLabelInterpolator,
-        this.props.leftButtonInterpolator
-      );
     }
+    return this._renderModularSubView(
+      { ...props, style },
+      'left',
+      this._renderModularLeftComponent,
+      this.props.leftLabelInterpolator,
+      this.props.leftButtonInterpolator
+    );
   }
 
   _renderTitle(props, options) {
     const { layoutPreset, transitionPreset } = this.props;
-    let style = [
+    const style = [
       { justifyContent: layoutPreset === 'center' ? 'center' : 'flex-start' },
       getTitleOffsets(
         layoutPreset,
@@ -479,39 +473,13 @@ class Header extends React.PureComponent {
       key: `scene_${props.scene.key}`,
     };
 
-    if (
-      options.headerLeft ||
-      options.headerBackImage ||
-      Platform.OS !== 'ios' ||
-      transitionPreset !== 'uikit'
-    ) {
-      return (
-        <View {...wrapperProps}>
-          {title}
-          {left}
-          {right}
-        </View>
-      );
-    } else {
-      return (
-        <MaskedViewIOS
-          {...wrapperProps}
-          maskElement={
-            <View style={styles.iconMaskContainer}>
-              <Image
-                source={require('../assets/back-icon-mask.png')}
-                style={styles.iconMask}
-              />
-              <View style={styles.iconMaskFillerRect} />
-            </View>
-          }
-        >
-          {title}
-          {left}
-          {right}
-        </MaskedViewIOS>
-      );
-    }
+    return (
+      <View {...wrapperProps}>
+        {title}
+        {left}
+        {right}
+      </View>
+    );
   }
 
   render() {
@@ -521,10 +489,10 @@ class Header extends React.PureComponent {
 
     if (mode === 'float') {
       const scenesByIndex = {};
-      this.props.scenes.forEach(scene => {
+      this.props.scenes.forEach((scene) => {
         scenesByIndex[scene.index] = scene;
       });
-      const scenesProps = Object.values(scenesByIndex).map(scene => ({
+      const scenesProps = Object.values(scenesByIndex).map((scene) => ({
         position: this.props.position,
         scene,
       }));
@@ -728,4 +696,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withOrientation(Header);
+export default Header;

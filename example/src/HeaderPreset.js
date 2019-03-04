@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Button, StatusBar } from 'react-native';
-import { SafeAreaView } from '@react-navigation/native';
-import { createStackNavigator } from 'react-navigation-stack';
+import { Button, StatusBar, SafeAreaView } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack-web';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -97,8 +96,8 @@ const StackWithHeaderPreset = createStackNavigator(
   {
     Home: HomeScreen,
     Other: OtherScreen,
-    ScreenWithNoHeader: ScreenWithNoHeader,
-    ScreenWithLongTitle: ScreenWithLongTitle,
+    ScreenWithNoHeader,
+    ScreenWithLongTitle,
   },
   {
     headerTransitionPreset: 'uikit',

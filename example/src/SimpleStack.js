@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dimensions, Button, View, Text } from 'react-native';
 import { withNavigation } from '@react-navigation/core';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack-web';
 
-const Buttons = withNavigation(props => (
+const Buttons = withNavigation((props) => (
   <React.Fragment>
     <Button
       title="Go to Details"

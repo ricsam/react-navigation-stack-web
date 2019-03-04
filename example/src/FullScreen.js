@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack-web';
 
 class Screen extends React.Component {
   static navigationOptions = {

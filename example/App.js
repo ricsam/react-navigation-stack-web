@@ -9,7 +9,7 @@ import {
 import {
   Assets as StackAssets,
   createStackNavigator,
-} from 'react-navigation-stack';
+} from 'react-navigation-stack-web';
 import { List, Divider } from 'react-native-paper';
 
 import FullScreen from './src/FullScreen';
@@ -29,7 +29,6 @@ import {
 } from './src/HeaderBackgrounds';
 
 // Comment the following two lines to stop using react-native-screens
-import { useScreens } from 'react-native-screens';
 
 // Uncomment the following line to force RTL. Requires closing and re-opening
 // your app after you first load it with this option enabled.
@@ -98,7 +97,7 @@ class Home extends React.Component {
     />
   );
 
-  _keyExtractor = item => item.routeName;
+  _keyExtractor = (item) => item.routeName;
 
   render() {
     return (
@@ -106,7 +105,7 @@ class Home extends React.Component {
         ItemSeparatorComponent={Divider}
         renderItem={this._renderItem}
         keyExtractor={this._keyExtractor}
-        renderScrollComponent={props => <SafeAreaScrollView {...props} />}
+        renderScrollComponent={(props) => <SafeAreaScrollView {...props} />}
         data={data}
         style={{ backgroundColor: '#fff' }}
       />
@@ -116,7 +115,7 @@ class Home extends React.Component {
 
 class SafeAreaScrollView extends React.Component {
   render() {
-    let { children, ...scrollViewProps } = this.props;
+    const { children, ...scrollViewProps } = this.props;
     return (
       <ScrollView {...scrollViewProps}>
         <SafeAreaView forceInset={{ top: 'never' }}>{children}</SafeAreaView>
@@ -145,7 +144,6 @@ const Root = createStackNavigator(
   }
 );
 
-useScreens();
 export default createAppContainer(Root);
 
 // Uncomment this to test immediate transitions

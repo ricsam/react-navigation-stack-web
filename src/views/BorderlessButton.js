@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Animated, Platform } from 'react-native';
-import { BaseButton } from 'react-native-gesture-handler';
+import { Animated, Platform, Button as BaseButton } from 'react-native';
 
 const AnimatedBaseButton = Animated.createAnimatedComponent(BaseButton);
 

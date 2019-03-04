@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, Button, Easing, View, Text } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack-web';
 
 class ListScreen extends React.Component {
   render() {
@@ -84,7 +84,7 @@ export default createStackNavigator(
         easing: Easing.inOut(Easing.ease),
         timing: Animated.timing,
       },
-      screenInterpolator: sceneProps => {
+      screenInterpolator: (sceneProps) => {
         const { position, scene } = sceneProps;
         const { index } = scene;
 

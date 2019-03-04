@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import { createSwitchNavigator } from '@react-navigation/core';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack-web';
 
 class SignInScreen extends React.Component<any, any> {
   static navigationOptions = {

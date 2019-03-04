@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack-web';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
@@ -40,7 +40,7 @@ const Drawer = createDrawerNavigator(
     },
   },
   {
-    contentComponent: props => <Menu {...props} />,
+    contentComponent: (props) => <Menu {...props} />,
     navigationOptions: { title: 'Example' },
   }
 );

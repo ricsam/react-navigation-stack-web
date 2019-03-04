@@ -10,7 +10,7 @@ import { MapView } from 'expo';
 import {
   createStackNavigator,
   StackGestureContext,
-} from 'react-navigation-stack';
+} from 'react-navigation-stack-web';
 import { NativeViewGestureHandler } from 'react-native-gesture-handler';
 
 const IndexScreen = ({ navigation }) => (
@@ -53,7 +53,7 @@ class MapScreen extends React.Component {
 
     return (
       <StackGestureContext.Consumer>
-        {ref => (
+        {(ref) => (
           <NativeViewGestureHandler waitFor={ref}>
             <MapView style={{ flex: 1 }} />
           </NativeViewGestureHandler>
@@ -69,7 +69,7 @@ MapScreen.navigationOptions = {
 
 const WebViewScreen = () => (
   <StackGestureContext.Consumer>
-    {ref => (
+    {(ref) => (
       <NativeViewGestureHandler waitFor={ref}>
         <WebView
           style={{ flex: 1 }}
